@@ -1,0 +1,18 @@
+<launch>
+	<arg name="use_robot_state_publisher" default="true"/>
+	<arg name="use_xacro" default="false" />
+	<arg name="use_sim_time" default="true" />
+	
+	<include file="$(find navvis_description)/launch/display.launch">
+		<arg name="use_robot_state_publisher" value="$(arg use_robot_state_publisher)" unless="$(arg use_robot_state_publisher)" />
+		<arg name="use_xacro" value="$(arg use_xacro)" unless="$(arg use_xacro)" />
+		<arg name="rviz_config_file" default="$(find rosbags_playback)/config/lab3config1.rviz" />
+	</include>
+	
+	<arg name="use_lab3robot_xacro" default="false" />
+	<arg if="$(arg use_lab3robot_xacro)" name="filename2" default="lab3robot.xacro" />
+	<arg unless="$(arg use_lab3robot_xacro)" name="filename2" default="urdf_from_xacro.urdf" />
+	<arg name="file2" default="$(find rosbags_playback)/urdf/$(arg filename2)" />
+	<param if="$(arg use_lab3robot_xacro)" name="robot_description" command="$(find xacro)/xacro $(arg file2)" /> 
+	<param unless="$(arg use_lab3robot_xacro)" name="robot_description" textfile="$(arg file2)" />
+</launch>
