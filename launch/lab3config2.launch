@@ -15,4 +15,7 @@
 	<arg name="file2" default="$(find rosbags_playback)/urdf/$(arg filename2)" />
 	<param if="$(arg use_lab3robot_xacro)" name="robot_description" command="$(find xacro)/xacro $(arg file2)" /> 
 	<param unless="$(arg use_lab3robot_xacro)" name="robot_description" textfile="$(arg file2)" />
+	
+	<arg name="map_file" default="$(find maps_glennan)/maps/glennan5_map.yaml" />
+	<node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
 </launch>

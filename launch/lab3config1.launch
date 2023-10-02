@@ -4,8 +4,8 @@
 	<arg name="use_sim_time" default="true" />
 	
 	<include file="$(find navvis_description)/launch/display.launch">
-		<arg name="use_robot_state_publisher" value="$(arg use_robot_state_publisher)" unless="$(arg use_robot_state_publisher)" />
-		<arg name="use_xacro" value="$(arg use_xacro)" unless="$(arg use_xacro)" />
+		<arg name="use_robot_state_publisher" value="$(arg use_robot_state_publisher)" />
+		<arg name="use_xacro" value="$(arg use_xacro)" />
 		<arg name="rviz_config_file" default="$(find rosbags_playback)/config/lab3config1.rviz" />
 	</include>
 	
@@ -15,4 +15,7 @@
 	<arg name="file2" default="$(find rosbags_playback)/urdf/$(arg filename2)" />
 	<param if="$(arg use_lab3robot_xacro)" name="robot_description" command="$(find xacro)/xacro $(arg file2)" /> 
 	<param unless="$(arg use_lab3robot_xacro)" name="robot_description" textfile="$(arg file2)" />
+	
+	<arg name="map_file" default="$(find maps_glennan)/maps/glennan5_map.yaml" />
+	<node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
 </launch>
