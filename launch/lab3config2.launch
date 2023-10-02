@@ -6,7 +6,7 @@
 	<include file="$(find navvis_description)/launch/display.launch">
 		<arg name="use_robot_state_publisher" value="$(arg use_robot_state_publisher)" unless="$(arg use_robot_state_publisher)" />
 		<arg name="use_xacro" value="$(arg use_xacro)" unless="$(arg use_xacro)" />
-		<arg name="rviz_config_file" default="$(find rosbags_playback)/config/lab3.rviz" />
+		<arg name="rviz_config_file" default="$(find rosbags_playback)/config/lab3config2.rviz" />
 	</include>
 	
 	<arg name="use_lab3robot_xacro" default="false" />

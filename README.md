@@ -64,4 +64,74 @@ Under "Global Options", set the "Fised Frame" to map.
 
 Under all three "LaserScan", set the "Decay Time" to 5-10. This will get laggy without a dedicated graphics card.
 
+## View Robot with 3 Configurations
 
+Three are three configurations:
+
+### Configuration 1: Original (no map loaded)
+
+To view the original robot with no maps loaded, use the following command:
+
+	roslaunch rosbags_playback lab3.launch &
+	
+When loaded, RVIZ will display the original robot model, with three lasers.
+
+### Configuration 2: Target Frame-Base (map loaded)
+
+To load the map, use the following:
+
+	rosrun map_server map_server `rospack find maps_glennan`/maps/glennan5_map.yaml
+	rostopic echo -n 1 /map
+
+To load the bag file, use the following:
+
+	rosbag play --clock /home/mingyupan/Downloads/gnennan-5-<basic/full>.bag /tf_trajectory:=/tf
+	
+To view the robot in RVIZ, use the following:
+
+	roslaunch rosbags_playback lab3config1.launch &
+	
+When loaded, RVIZ will display the robot model with the map and laser scanned surrounding with decay time of 5. The view frame was set to "base" so the camera focuses on the robot constantly. 
+
+#### Sim-time
+
+Remember to "Reset" if necessary. 
+
+If use_sim_time is TRUE (default), click "reset" will replay the bag file and allow the robot to begin from the very start.
+
+If use_sim_time is FALSE, click "reset" will NOT replay the bag file and the robot will be in the position specified by the bag file at the time of reset.
+
+### Configuration 3: Target Frame-Map (map loaded)
+
+To load the map, use the following:
+
+	rosrun map_server map_server `rospack find maps_glennan`/maps/glennan5_map.yaml
+	rostopic echo -n 1 /map
+	
+To load the bag file, use the following:
+
+	rosbag play --clock /home/mingyupan/Downloads/gnennan-5-<basic/full>.bag /tf_trajectory:=/tf
+	
+To view the robot in RVIZ, use the following:
+
+	roslaunch rosbags_playback lab3config2.launch &
+	
+When loaded, RVIZ will display the robot model with the map and laser scanned surrounding with decay time of 5. The view frame was set to "map". 
+
+#### Sim-time
+
+Remember to "Reset" if necessary. 
+
+### Other Modifications to Configurations Above
+
+To Not use robot_state_publisher, add the following:
+
+	roslaunch ... use_robot_state_publisher:=false ... &
+	
+To Not use the lab3robot.xacro file, add the following:
+
+	roslaunch ... use_lab3robot_xacro:=false ... &
+
+To NOT use the external clock (sim_time), add the following:
+
+	roslaunch ... use_sim_time:=false ... &
