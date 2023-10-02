@@ -12,7 +12,7 @@ Lab 3 Link: [Laboratory #3_cert-1.pdf](https://canvas.case.edu/courses/38747/ass
 
 ### robot_state_publisher Update
 
-Since the ROS bag from the survey includes transformation messages, robot_state_publisher does not need to be used, and the launch file was updated to include a new argument, use_robot_state_publisher, that has a default true value.
+Since the ROS bag from the survey includes transformation messages, robot_state_publisher does not need to be used, and the launch file was updated to include a new argument. use_robot_state_publisher has a default "true" value and corresponding files in Lab 2 and Lab 3 were modified.
 
 ### Load the Previous Robot Model
 
@@ -26,7 +26,7 @@ Download the bag files to ubuntu. To play the bags, use the following command:
 
 	rosbag play --clock /home/mingyupan/Download/glennan_5_<size>.bag /tf_trajectory:=/tf
 
-This will start the bag playback.
+This will start the bag playback. Remove "--clock" to NOT use the external (sim_time) clock. 
 
 ## View the Map
 
@@ -42,7 +42,7 @@ The map of Glennan needs to be cloned to be viewed on the computer. Use the foll
 
 	git clone https://github.com/cwru-eecs-373/maps_glennan.git
 
-Remember to catkin_make after download.
+REMEMBER to catkin_make after download.
 
 ### map_server Package
 
@@ -66,7 +66,7 @@ Under all three "LaserScan", set the "Decay Time" to 5-10. This will get laggy w
 
 ## View Robot with 3 Configurations
 
-Three are three configurations:
+There are three configurations:
 
 ### Configuration 1: Original (no map loaded)
 
@@ -103,14 +103,11 @@ If use_sim_time is FALSE, click "reset" will NOT replay the bag file and the rob
 
 ### Configuration 3: Target Frame-Map (map loaded)
 
-To load the map, use the following:
+To load the map and bag file, use the following:
 
 	rosrun map_server map_server `rospack find maps_glennan`/maps/glennan5_map.yaml
 	rostopic echo -n 1 /map
-	
-To load the bag file, use the following:
-
-	rosbag play --clock /home/mingyupan/Downloads/gnennan-5-<basic/full>.bag /tf_trajectory:=/tf
+	rosbag play --clock /home/mingyupan/Downloads/gnennan-5-<size>.bag /tf_trajectory:=/tf
 	
 To view the robot in RVIZ, use the following:
 
@@ -124,14 +121,14 @@ Remember to "Reset" if necessary.
 
 ### Other Modifications to Configurations Above
 
-To Not use robot_state_publisher, add the following:
+To NOT use the external clock (sim_time), add the following:
 
-	roslaunch ... use_robot_state_publisher:=false ... &
+	roslaunch ... use_sim_time:=false ... &
 	
 To Not use the lab3robot.xacro file, add the following:
 
 	roslaunch ... use_lab3robot_xacro:=false ... &
+	
+To Not use robot_state_publisher, add the following:
 
-To NOT use the external clock (sim_time), add the following:
-
-	roslaunch ... use_sim_time:=false ... &
+	roslaunch ... use_robot_state_publisher:=false ... &
