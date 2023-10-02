@@ -2,10 +2,11 @@
 	<arg name="use_robot_state_publisher" default="true"/>
 	<arg name="use_xacro" default="false" />
 	<arg name="use_sim_time" default="true" />
+	<param if="$(arg use_sim_time)" name="/use_sim_time" value="true" />
 	
 	<include file="$(find navvis_description)/launch/display.launch">
-		<arg name="use_robot_state_publisher" value="$(arg use_robot_state_publisher)" unless="$(arg use_robot_state_publisher)" />
-		<arg name="use_xacro" value="$(arg use_xacro)" unless="$(arg use_xacro)" />
+		<arg name="use_robot_state_publisher" value="$(arg use_robot_state_publisher)" />
+		<arg name="use_xacro" value="$(arg use_xacro)" />
 		<arg name="rviz_config_file" default="$(find rosbags_playback)/config/lab3config2.rviz" />
 	</include>
 	
