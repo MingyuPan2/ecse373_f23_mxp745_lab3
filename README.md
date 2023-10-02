@@ -97,9 +97,7 @@ When loaded, RVIZ will display the robot model with the map and laser scanned su
 
 Remember to "Reset" if necessary. 
 
-If use_sim_time is TRUE (default), click "reset" will replay the bag file and allow the robot to begin from the very start.
-
-If use_sim_time is FALSE, click "reset" will NOT replay the bag file and the robot will be in the position specified by the bag file at the time of reset.
+If use_sim_time is TRUE (default), the rosbag tool can provide the external clock signal based on the original data collection when given the proper command-line argument.
 
 ### Configuration 3: Target Frame-Map (map loaded)
 
