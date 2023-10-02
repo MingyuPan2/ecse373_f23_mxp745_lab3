@@ -78,11 +78,6 @@ When loaded, RVIZ will display the original robot model, with three lasers.
 
 ### Configuration 2: Target Frame-Base (map loaded)
 
-To load the map, use the following:
-
-	rosrun map_server map_server `rospack find maps_glennan`/maps/glennan5_map.yaml
-	rostopic echo -n 1 /map
-
 To load the bag file, use the following:
 
 	rosbag play --clock /home/mingyupan/Downloads/gnennan-5-<basic/full>.bag /tf_trajectory:=/tf
@@ -101,10 +96,8 @@ If use_sim_time is TRUE (default), the rosbag tool can provide the external cloc
 
 ### Configuration 3: Target Frame-Map (map loaded)
 
-To load the map and bag file, use the following:
+To load the bag file, use the following:
 
-	rosrun map_server map_server `rospack find maps_glennan`/maps/glennan5_map.yaml
-	rostopic echo -n 1 /map
 	rosbag play --clock /home/mingyupan/Downloads/gnennan-5-<size>.bag /tf_trajectory:=/tf
 	
 To view the robot in RVIZ, use the following:
